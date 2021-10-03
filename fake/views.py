@@ -9,6 +9,17 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 
 
+def register(request):
+    if request.method == 'POST':
+        form = registrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your username is "{username}"')
+            return redirect('login')
+    else:
+        form = registrationForm()
+    return render(request, 'Users/registerForm.html', {"form": form})
 
 class HomePage(TemplateView):
 	def get(self, request):

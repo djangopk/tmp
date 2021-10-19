@@ -13,3 +13,27 @@ def printBoard(board, n):
         print()
         # print("---------------------------------")
         print(string)
+
+def isSafe(board, row, col, n):
+    for r in range(0, row):
+        if(board[r][col] == 1):
+            return False
+    
+    r=row
+    c=col
+    while(r>=0 and c>=0):
+        if(board[r][c] == 1):
+            return False
+        r-=1
+        c-=1
+
+    r=row
+    c=col
+    while(r>=0 and c<n):
+        if board[r][c] == 1:
+            return False
+        r-=1
+        c+=1
+
+    return True
+    
